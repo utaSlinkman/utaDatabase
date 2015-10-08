@@ -1,0 +1,410 @@
+.btn {
+  background: #6bdae0;
+  background-image: -webkit-linear-gradient(top, #6bdae0, #308D92);
+  background-image: -moz-linear-gradient(top, #6bdae0, #308D92);
+  background-image: -ms-linear-gradient(top, #6bdae0, #308D92);
+  background-image: -o-linear-gradient(top, #6bdae0, #308D92);
+  background-image: linear-gradient(to bottom, #6bdae0, #308D92);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 4px 8px 4px 8px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #6bdae0;
+  background-image: -webkit-linear-gradient(top, #7beaf0, #409Da2);
+  background-image: -moz-linear-gradient(top, #7beaf0, #409Da2);
+  background-image: -ms-linear-gradient(top, #7beaf0, #409Da2);
+  background-image: -o-linear-gradient(top, #7beaf0, #409Da2);
+  background-image: linear-gradient(to bottom, #7beaf0, #409Da2);
+  text-decoration: none;
+}
+
+TABLE
+{
+	font-family: Helvetica;
+	font-size: 12;
+}
+
+TABLE.down_table
+{
+    width: 80%;
+}
+
+A
+{
+    color: #228083;
+}
+
+A:hover
+{
+    text-decoration: none;
+}
+
+A.quickDownloadLink
+{
+    font-size: 16;
+    font-family: "Arial";
+}
+
+IMG.rssImg
+{
+    margin: 2px;
+    border-width: 0px;
+}
+
+IMG.logoImg
+{
+	border-width: 0px;
+	margin-bottom: 10px;
+}
+IMG:hover.logoImg
+{
+	border-width: 0px;
+}
+
+TEXTAREA.licenceView
+{
+	width: 570px;
+	height: 250px;
+	border: #228083 1px solid;
+}
+
+HR.licencesSplitter
+{
+	width: 400px;
+	height: 1px;
+	background-color: #228083;
+	border-width: 0px;
+}
+
+TD.topBar
+{
+	background-image: url('img/button_gradient.png');
+	width: 100%;
+	height: 30px;
+	border-width: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+TD.bottomBar
+{
+	background-image: url('img/bottom_bar.png');
+	width: 100%;
+	height: 48px;
+	color: white;
+	border-width: 0px;
+	margin: 0px;
+	padding: 0px;
+
+	font-family: Verdana;
+	font-size: 12;
+	white-space: nowrap;
+	text-align: center;
+	vertical-align: bottom;
+}
+
+TD.bottomLeftBar
+{
+	width: 1px;
+	height: 49px;
+	padding: 0px;
+	margin: 0px;
+	border-width: 0px;
+}
+
+TD.bottomRightBar
+{
+	width: 1px;
+	height: 49px;
+	padding: 0px;
+	margin: 0px;
+	border-width: 0px;
+}
+
+TD.topBarSeparator
+{
+	width: 2px;
+	height: 30px;
+}
+
+TD.topBarBtn
+{
+	background-image: url('img/button_gradient.png');
+	height: 30px;
+	font-family: Arial;
+	font-size: 12;
+	font-weight: bold;
+	white-space: nowrap;
+	color: white;
+}
+
+TD.topBarBtnHg
+{
+	background-image: url('img/button_gradient_hg.png');
+	height: 30px;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 12;
+	font-weight: bold;
+	white-space: nowrap;
+	color: white;
+}
+
+TD.topBarBtnGold
+{
+	background-image: url('img/button_gradient_gold.png');
+	height: 30px;
+	font-family: Arial;
+	font-size: 12;
+	font-weight: bold;
+	white-space: nowrap;
+	color: white;
+}
+
+TD.topBarBtnGoldHg
+{
+	background-image: url('img/button_gradient_gold_hg.png');
+	height: 30px;
+	cursor: pointer;
+	font-family: Arial;
+	font-size: 12;
+	font-weight: bold;
+	white-space: nowrap;
+	color: white;
+}
+
+TD.underTopBar
+{
+	background-image: url('img/top_bar_under_gradient.png');
+	width: 740;
+	height: 22px;
+}
+
+TD.topLeftBar
+{
+	width: 1px;
+	height: 52px;
+	padding: 0px;
+	margin: 0px;
+}
+
+TD.topRightBar
+{
+	width: 1px;
+	height: 52px;
+	padding: 0px;
+	margin: 0px;
+}
+
+TR.downloadRow
+{
+	background-image: url('img/news.png');
+}
+
+TR.downloadRowDeprecated
+{
+	text-decoration: line-through;
+}
+
+TR.downloadHdr
+{
+	background-color: #228083;
+	color: #AAFFFF;
+	font-weight: bold;
+	text-align: center;
+}
+
+TD.sideBar
+{
+	width: 1px;
+	padding: 0px;
+	margin: 0px;
+	height: 100%;
+	background-color: #228083;
+}
+
+DIV.sideBarDiv
+{
+	width: 2px;
+	background-color: #228083;
+	border-width: 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+}
+
+TD.mainTd
+{
+	background-image: url('img/bg_gradient.png');
+	background-repeat: repeat-x;
+	width: 100%;
+	height: 448px;
+	vertical-align: top;
+}
+
+TD.mainTdInternal
+{
+	width: 100%;
+	vertical-align: top;
+	margin: 10px;
+	margin: 10px;
+	font-family: Helvetica;
+	font-size: 12;
+}
+
+TD.mainAnyCell
+{
+	font-family: Helvetica;
+	font-size: 12;
+}
+
+TD.screenShotFont
+{
+	font-family: Helvetica;
+	font-size: 12;
+	/*text-align: center;*/
+}
+
+TD.flatTd
+{
+	padding: 0px;
+	margin: 0px;
+	border-spacing: 0px;
+}
+
+TABLE.contentTable
+{
+	margin: 0px;
+	margin-top: 0px;
+	width: 100%;
+}
+
+TABLE.topTable
+{
+	border-style: none;
+	border-width: 0px;
+	padding: 0px;
+	margin: 0px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	empty-cells: show;
+}
+
+TABLE.layoutTable
+{
+	border-style: none;
+	width: 800px;
+	border-width: 0px;
+	padding: 0px;
+	margin: 0px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	empty-cells: show;
+}
+
+TABLE.layoutTable TR
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+TABLE.layoutTable TR TD
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+TABLE.internalLayoutTable
+{
+	border-style: none;
+	width: 100%;
+	border-width: 0px;
+	padding: 0px;
+	margin: 0px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	empty-cells: show;
+}
+
+TABLE.news
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #308D92;
+	padding: 0px;
+	margin: 0px;
+	border-spacing: 0px;
+	border-collapse: collapse;
+	empty-cells: show;
+	height: 532px;
+	width: 160px;
+}
+
+TD.newsTop
+{
+	background-image: url('img/news_top.png');
+	height: 20px;
+	width: 161px;
+}
+
+TD.newsBody
+{
+	background-image: url('img/news.png');
+	background-repeat: no-repeat;
+	vertical-align: top;
+	width: 161px;
+}
+
+TABLE.newsInternal
+{
+	margin: 5px;
+	font-family: Helvetica;
+	font-size: 11;
+}
+
+TD.copy
+{
+	font-family: Helvetica;
+	font-size: 10;
+}
+
+UL.features
+{
+	line-height: 20px;
+}
+
+INPUT.fancyInput
+{
+	border: #228083 1px solid;
+}
+
+DIV.cookiesDiv
+{
+    position: fixed;
+    z-index: 150;
+    _position: absolute;
+    top: 5px;
+    background-color: #80F5F2;
+    opacity: 0.9;
+    width: 200px;
+    margin: 0px;
+    left: 5px;
+    padding: 10px;
+    text-align: center;
+    font-size: 10px;
+    -webkit-border-radius: 6;
+    -moz-border-radius: 6;
+    border-radius: 6px;
+}
+
+DIV.cookiesDiv A
+{
+    color: #000000;
+}
