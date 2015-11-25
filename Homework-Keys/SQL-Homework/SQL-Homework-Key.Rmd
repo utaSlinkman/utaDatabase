@@ -1,0 +1,572 @@
+---
+title: "SQL Homework"
+author: "by Craig W. Slinkman"
+date: "November 25, 2015"
+output: html_document
+---
+
+The homework is done using R-Markdown and embedded SQL so that the one file can be used to show the entire homework.  All quieries were first run on the SQLite Query program and then copies into embeded SQL.  
+
+# Q1
+1.	How many teams were there in the year 2014 in major league baseball?
+
+```{r Q1}
+#
+###########################################################
+# Load package, specify path to SQLite database, and      #
+# connect to database.                                    #
+###########################################################
+#
+require( RSQLite )
+require( DBI )
+
+DB <- "C:/Users/Craig/Databases/lahman2014.sqlite"
+
+db <- dbConnect(SQLite(), dbname = DB )
+#
+#
+###########################################################
+# Create query string                                     #
+###########################################################
+#
+query <- 
+    "SELECT  count( * )
+     FROM    Teams
+     WHERE   yearID = 2014;"
+#
+#
+###########################################################
+# We use dbGetQuery which sends, fetches and clears for   #
+# you. The result us stored in an R data frame which we   #
+# auto-print.                                             #
+###########################################################
+#
+Results <- 
+    dbGetQuery( db,
+                query )
+Results
+#
+#
+##########################################################
+# Disconnect from database to free shared resources.     #
+##########################################################
+
+dbDisconnect( db )
+```
+
+# Q2
+2.	Use the _GROUP BY_ statement to count the number of __Teams__ in the American and National Leagues in the year 1960.  
+
+```{r Q2}
+#
+###########################################################
+# Load package, specify path to SQLite database, and      #
+# connect to database.                                    #
+###########################################################
+#
+require( RSQLite )
+require( DBI )
+
+DB <- "C:/Users/Craig/Databases/lahman2014.sqlite"
+
+db <- dbConnect(SQLite(), dbname = DB )
+#
+#
+###########################################################
+# Create query string.                                     #
+###########################################################
+#
+query <- 
+    "SELECT  lgID,
+             count( * )
+     FROM    Teams
+     WHERE   yearID = 1960
+     GROUP BY lgID;"
+#
+#
+###########################################################
+# We use dbGetQuery which sends, fetches and clears for   #
+# you. The result us stored in an R data frame which we   #
+# auto-print.                                             #
+###########################################################
+#
+Results <- 
+    dbGetQuery( db,
+                query )
+Results
+#
+#
+##########################################################
+# Disconnect from database to free shared resources.     #
+##########################################################
+
+dbDisconnect( db )
+
+```
+
+
+# Q3
+List all the playerds who played for the Texas Rangers who were not Pitchers during the 2010 season.  Use the Batting Table and the Master table to answer this question.  You only need to show the batters that show up on the first page.  
+
+```{r Q3}
+#
+require( RSQLite )
+require( DBI )
+
+DB <- "C:/Users/Craig/Databases/lahman2014.sqlite"
+
+db <- dbConnect(SQLite(), dbname = DB )
+#
+#
+###########################################################
+# Create query string.                                     #
+###########################################################
+#
+query <- 
+    "SELECT  M.nameLast || ', ' || M.nameFirst AS `Batter`
+FROM    Batting B
+        NATURAL JOIN MASTER M
+WHERE   B.teamID = 'TEX'
+  AND   B.yearID = 2010"
+#
+#
+###########################################################
+# We use dbGetQuery which sends, fetches and clears for   #
+# you. The result us stored in an R data frame which we   #
+# auto-print.                                             #
+###########################################################
+#
+Results <- 
+    dbGetQuery( db,
+                query )
+head( Results, 10 )
+tail( Results, 10 )
+#
+#
+##########################################################
+# Disconnect from database to free shared resources.     #
+##########################################################
+
+dbDisconnect( db )
+
+```
+
+# Q4
+Repeat Question 3 including using the Pitching table instead of the Batting 
+
+```{r Q4}
+#
+require( RSQLite )
+require( DBI )
+
+DB <- "C:/Users/Craig/Databases/lahman2014.sqlite"
+
+db <- dbConnect(SQLite(), dbname = DB )
+#
+#
+###########################################################
+# Create query string.                                    #
+###########################################################
+#
+query <- 
+    "SELECT  M.nameLast || ', ' || M.nameFirst AS `Pitcher`
+FROM    Pitching P
+        NATURAL JOIN MASTER M
+WHERE   P.teamID = 'TEX'
+  AND   P.yearID = 2010"
+#
+#
+###########################################################
+# We use dbGetQuery which sends, fetches and clears for   #
+# you. The result us stored in an R data frame which we   #
+# auto-print.                                             #
+###########################################################
+#
+Results <- 
+    dbGetQuery( db,
+                query )
+head( Results, 10 )
+tail( Results, 10 )
+#
+#
+##########################################################
+# Disconnect from database to free shared resources.     #
+##########################################################
+
+dbDisconnect( db )
+
+```
+
+# Q5
+5.	Go to the SQLite documentation and look up the UNION statement.  Use the UNION statement to get all the players.
+
+```{r Q5}
+#
+require( RSQLite )
+require( DBI )
+
+DB <- "C:/Users/Craig/Databases/lahman2014.sqlite"
+
+db <- dbConnect(SQLite(), dbname = DB )
+#
+#
+###########################################################
+# Create query string.                                    #
+###########################################################
+#
+query <- 
+"SELECT  M.nameLast || ', ' || M.nameFirst AS `Player`
+ FROM    Batting B
+         NATURAL JOIN 
+         MASTER M
+ WHERE   B.teamID = 'TEX'
+   AND   B.yearID = 2010
+ UNION
+ SELECT  M.nameLast || ', ' || M.nameFirst AS `Player`
+  FROM   Pitching P
+         NATURAL JOIN 
+         MASTER M
+  WHERE  P.teamID = 'TEX'
+    AND   P.yearID = 2010;"
+#
+#
+###########################################################
+# We use dbGetQuery which sends, fetches and clears for   #
+# you. The result us stored in an R data frame which we   #
+# auto-print.                                             #
+###########################################################
+#
+Results <- 
+    dbGetQuery( db,
+                query )
+Results
+#
+#
+##########################################################
+# Disconnect from database to free shared resources.     #
+##########################################################
+
+dbDisconnect( db )
+
+```
+
+$ 
+```{r Q6}
+#
+require( RSQLite )
+require( DBI )
+
+DB <- "C:/Users/Craig/Databases/lahman2014.sqlite"
+
+db <- dbConnect(SQLite(), dbname = DB )
+#
+#
+###########################################################
+# Create query string.                                    #
+###########################################################
+
+query <-
+"DROP VIEW IF EXISTS Rangers2010"
+
+dbSendQuery( db, query )
+
+query <- 
+"CREATE VIEW Rangers2010
+AS
+    SELECT  M.nameLast || ', ' || M.nameFirst AS `Player`
+    FROM    Batting B
+            NATURAL JOIN 
+            MASTER M
+    WHERE   B.teamID = 'TEX'
+      AND   B.yearID = 2010
+    UNION
+    SELECT  M.nameLast || ', ' || M.nameFirst AS `Player`
+    FROM    Pitching P
+            NATURAL JOIN 
+            MASTER M
+    WHERE   P.teamID = 'TEX'
+      AND   P.yearID = 2010;"
+#
+#
+###########################################################
+# We use dbGetQuery which sends, fetches and clears for   #
+# you. The result us stored in an R data frame which we   #
+# auto-print.                                             #
+###########################################################
+#
+Results <- 
+    dbGetQuery( db,
+                query )
+
+#
+#
+##########################################################
+# Note that no results are sent back by the CREATE VIEW  #
+# DDL command.  So we will exexute a select statement    #
+# Using the view.  It should give us the same relats as  #
+# Q5.                                                    #
+##########################################################
+
+query <-
+"SELECT * 
+ FROM Rangers2010;"
+
+Results <- dbGetQuery(db, query )
+head( Results, 10 )
+tail( Results, 10 )
+#
+#
+##########################################################
+# Disconnect from database to free shared resources.     #
+##########################################################
+
+dbDisconnect( db )
+
+```
+
+# Q7
+Use the view you just created to produce a list of the Rangers who played in 2010 sorted in order by last name, and then first name.  Print the names in the same order.
+
+```{r Q7}
+#
+require( RSQLite )
+require( DBI )
+
+DB <- "C:/Users/Craig/Databases/lahman2014.sqlite"
+
+db <- dbConnect(SQLite(), dbname = DB )
+#
+#
+###########################################################
+# Create query string.                                    #
+###########################################################
+
+query <-
+"SELECT * 
+ FROM Rangers2010;"
+
+Results <- dbGetQuery(db, query )
+head( Results, 10 )
+tail( Results, 10 )
+#
+#
+##########################################################
+# Disconnect from database to free shared resources.     #
+##########################################################
+
+dbDisconnect( db )
+
+```
+
+# Acess function 
+We can simply the code by placing the database call in an function.  We then will` call the function with the qurey and the function will return the resuls.
+
+```{r AccessFunction}
+#
+require( RSQLite )
+require( DBI )
+
+getLahman <- function( query ){
+    DB <- "C:/Users/Craig/Databases/lahman2014.sqlite"
+    db <- dbConnect(SQLite(), dbname = DB )
+    Results <- dbGetQuery( db, query)
+    dbDisconnect( db )
+    Results
+}
+
+```
+
+We now test the function using a query.
+
+```{r TestFunction}
+query <- 
+"Select  playerID,
+         nameLast,
+         nameFirst
+FROM     MASTER
+WHERE    nameLast = 'Pence'
+  AND    nameFirst = 'Hunter';"
+Results <- getLahman(  query  )
+Results
+
+```
+  
+We will use the getLahman function to answer the rest questions.
+
+# Q8
+I have alreay include this functionality in the __VIEW__ _Ramgers2010_.  See question Q6.  
+
+# Q9
+Count the number of years that Babe Ruth played major league baseball.  There is only one player in the history of baseball with the last name of Ruth.
+
+```{r Q9}
+
+query <-
+"SELECT count(*)
+ FROM   Master M
+        NATURAL JOIN
+        Batting B
+WHERE   M.nameLast = 'Ruth';"
+#
+Results <- getLahman( query )
+Results
+
+```
+  
+# Q10
+10.	Compute the total salaries of every major league baseball team in the year 2014.  List the team name and the total salaries.  
+
+```{r Q10}
+query <-
+"SELECT   franchName as `Team`,
+         SUM( salary ) AS `Team Salary`
+FROM     TeamsFranchises F
+         NATURAL JOIN
+         Teams T  
+         NATURAL JOIN 
+         Salaries S       
+WHERE    T.yearID = 2014
+GROUP BY T.teamID
+ORDER BY `Team Salary` DESC;"
+
+Results <- getLahman( query  )
+Results
+
+```
+
+
+# Q11
+11.	Compute the percent of runs scored for the Texas Rangers player Elvis Andres for the 2010 baseball season compared to the total runs scored by the team.  Hint you will need to three select statements to do this in a single select your query should have a structure that  looks something like this:
+
+SELECT ( SELECT ... FROM  . WHERE .  ) / ( SELECT .. FROM .WHERE ..  )
+
+```{r Q11}
+
+query <-
+    "SELECT 
+      ( SELECT  100 * CAST( B.R AS FLOAT )
+        FROM    Master M
+                NATURAL JOIN
+                Batting B
+         WHERE   M.nameLast = 'Andrus'
+         AND  M.nameFirst = 'Elvis'
+         AND  B.yearID = 2010 )
+         / 
+      ( SELECT R
+           FROM   Teams
+           WHERE  teamID = 'TEX'
+           and    yearID = 2010 ) AS `Percent Runs`;"
+
+Result <- getLahman(  query )
+Result
+
+```
+
+# Q12
+Consider the Batting statistics tables.  Some of the modern statistics have only been kept recently.  Amount these statistics are IBB (Intentional walks) and HBP (Hit by Pitch).  Write a query that will give the first year that both statistics were kept.  You will need this year in the next query.  
+
+```{r Q12}
+
+query <- 
+"SELECT max( yearID )
+FROM   Batting
+WHERE  IBB IS NULL
+  AND  HBP IS NULL;"
+
+Results <- getLahman( query )
+Results
+
+```
+
+# Q13
+13.	 Create a view call BPerformance from the Batting table for all years equal to or greater than the year you discovered in Question 12.   In your view the original Batting columns and include the following new columns.
+
+## Column name	Equation
+BA	BA = HITS / AB
+OBP	OBP = ( H + BB + IBB +HBP ) / (AB + + BB + IBB +HBP)
+SLG	SLG = ( H + `2B` + 2 * `3B` + 3 * HR ) / AB
+Note: that SQL variables that start with numbers must be enclosed in backward quotes.
+
+Note that you will need to cast (change) one expression to a floating point number to get decimal answers for BA, OBP, and SLG.  We do this with the SQLite CAST function.  For example, the expression to compute the batting will look like:
+
+```{r }
+
+dropView <-
+    "DROP VIEW IF EXISTS BPerformance"
+
+require( RSQLite )
+require( DBI )
+
+DB <- "C:/Users/Craig/Databases/lahman2014.sqlite"
+
+db <- dbConnect(SQLite(), dbname = DB )
+dbSendQuery( db, dropView )
+
+query <- 
+"CREATE VIEW  BPerformance
+AS 
+SELECT   *,
+         CAST( H AS FLOAT) / AB AS BA,
+         ( CAST( H AS FLOAT) + BB + IBB + HBP ) / ( CAST( AB AS FLOAT) + BB + IBB + HBP ) AS OBP,
+         ( CAST( H AS FLOAT) + `2B` + 2 * `3B` +3 * HR ) / AB AS SLG
+FROM     Batting
+WHERE    yearID > 1999;"
+
+query <- dbSendQuery( db, query)
+
+```
+# Q14
+14.	Use the view you just created to list the Texas Rangers players for the 2014 season.  Return the players last name, BA, OPB, SLG, and the sum of OPB and SLG as a variable called OPS.  Order the players by OPS in descending order.  Only list the players with at least 100 bats.
+
+```{r Q14}
+
+query <-
+"SELECT   nameLast,
+         BA,
+         OBP,
+         SLG
+FROM     BPerformance
+         NATURAL JOIN
+         Master
+WHERE    teamID = 'TEX'
+  AND    yearID = 2014
+  AND    AB > 100
+ORDER BY OBP DESC;"
+
+Results <- getLahman( query )
+Results
+
+```
+
+# Q15
+15.	Use a nested query to determine the name of player or players who have the highest salary in MLB for the year 2014.  List the first and last names.  
+
+```{r Q15}
+
+query <- 
+" SELECT nameLast,
+        salary
+ FROM   Master
+        NATURAL JOIN
+        Salaries S
+WHERE S.Salary IN 
+    ( SELECT  max( salary )
+      FROM    Salaries
+      WHERE   yearID = 2014 );"
+
+Results <- getLahman( query )
+Results
+
+```
+
+# Q16
+16.	Use SQL to determine which of those players plaid for the Texas Rangers.
+
+```{r Q16}
+
+
+```
+
+
+
+
