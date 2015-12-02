@@ -1,0 +1,17 @@
+{
+    "contents" : "# Advanced R-database programming\n\n##########################################################\n# Clear the R-ennvironment, that us remove all objects   #\n# from memory.                                           #\n##########################################################\n#\nrm( list=ls())\n#\n#\n##########################################################\n# We are going to use the Chinook database in the my     #\n# Databases table.  The character variable below points  #\n# to the Chinook database.                               #\n##########################################################\n#\nDB <- \"C:/Users/Craig/Databases/Chinook.sqlite\"\n#\n#\n#########################################################\n# We need to load the RSQLite software from the library #\n# and the database interface software.                  #\n#########################################################\n#\nloaded <- require( RSQLite )\n{\nif( loaded )\n    print( \"SQLIte package loaded.\" )\n} else {\n    stop( \"SQLite package not loaded.\")\n}\n#\n#\n#########################################################\n# Now we can connect to the actual database.            #\n#########################################################\n#\ndb <- dbConnect( SQLite(), DB)\n#\n#\n########################################################\n# We can get all the results at once by using the      #\n# dbGetGuery function.                                 #\n########################################################\n#\nArtist <- dbGetQuery( db,\n                      \"SELECT * FROM Artist\" )\n\n########################################################\n# Close connection to free up database resources. You  #\n# always do this becuase you are sharing resourcews    #\n# other users.                                         #\n########################################################\n#\nRC <- dbDisconnect( db )\n#\n#\n#######################################################\n# Confirm thge database connection closed sucessfully.#\n# If not display error message and stop.              #\n#######################################################\n\n\n#\n# \n#######################################################\n# Now we can display the contents of the Artist table #\n# using R's autoprint feature. Here I will only print #\n# the first 10 rows of the table.                     #\n#######################################################\n#\nArtist[1:10,]\n\n",
+    "created" : 1448503623606.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "1088754906",
+    "id" : "4F21B453",
+    "lastKnownWriteTime" : 1448299151,
+    "path" : "C:/Users/Craig/utaDatabase/EmbeddedSQL/AdvanceSQLite I.r",
+    "project_path" : "AdvanceSQLite I.r",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

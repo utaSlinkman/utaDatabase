@@ -1,0 +1,18 @@
+{
+    "contents" : "# AdvancedSQLite4.r\n\n###########################################################\n# The R-script shows how to execute a prepared query      #\n# in the insert statement.  Cirrently, the insert         #\n# is the only SQLite statement that is supported by       #\n# the RSQLite package.                                    #\n###########################################################\n#\n#\n##########################################################\n# Clear memory of variables.                             #\n##########################################################\n#\nrm( list=ls())\n#\n#\n##########################################################\n# Load the RSQLite package for SQLite connections.       #\n##########################################################\n#\nrequire( RSQLite )\n#\n#\n#########################################################\n# Load the NewAlbum.csv file as a data frame.           #\n#########################################################\n#\nAlbums <- read.csv( \"NewAlbums.csv\" )\n#\n#\n#########################################################\n# Define path to database.                              #\n#########################################################\n#\nDB <- \"C:/Users/Craig/Databases/Shinook.sqlite\"\n#\n#\n#########################################################\n# Determine the number of rows un the input data frame. #\n#########################################################\n#\nsize <- dim( Albums )\nrows <- size[1]\n#\n#\n#########################################################\n# Connect to the database.                              #\n#########################################################\n#\ncon <- dbConnect(SQLite(), DB )\n#\n#\n########################################################\n# In production software we should check to see.if the #\n# database connection was successful.  We will not do  #\n# this here to keep things sinople for the non-        #\n# programers amound is.                                #\n########################################################\n#\n#\n#\n########################################################\n# We will loop throught the input data frame.          #\n#                                                      #\n# 1. Check tp see if the album exists. If so we do not #\n#     need to add it.                                  #\n########################################################\n\nfor( rows in 1:rows ){\n    \n    \n                 \n    \n}\n\n########################################################\n# Free up resources be dosconnection from the database.#\n########################################################\n#\nsuccess <- dbDisconnect( con )\nsuccess\n",
+    "created" : 1448906051845.000,
+    "dirty" : false,
+    "encoding" : "ISO8859-1",
+    "folds" : "",
+    "hash" : "115409876",
+    "id" : "A10592F8",
+    "lastKnownWriteTime" : 1448915417,
+    "path" : "C:/Users/Craig/utaDatabase/EmbeddedSQL/AdvancedSQLite4.R",
+    "project_path" : "AdvancedSQLite4.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : true,
+    "type" : "r_source"
+}
